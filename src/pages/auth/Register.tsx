@@ -3,12 +3,28 @@ import "./auth.css";
 import { Link } from "react-router-dom";
 
 const Register: React.FC = () => {
-    const [formData, setFormData] = React.useState({
-        name: "",
-        email: "",
-        password: "",
-        password2: "",
-    })
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const { name, email, password, password2 } = formData;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password !== password2) {
+        setAlert && setAlert("Passwords do not match", "danger");
+    } else {
+        registerUser({ name, email, password });
+    }
+    }
   return (
     <div className="register-container">
       <div className="register-wrapper">

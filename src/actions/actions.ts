@@ -124,6 +124,15 @@ interface UPDATE_MOVIE_STAR_RATING_FAIL {
   payload: string;
 }
 
+interface SET_ALERT {
+  type: typeof ActionTypes.SET_ALERT;
+  payload: any;
+}
+
+interface REMOVE_ALERT {
+    type: typeof ActionTypes.REMOVE_ALERT,
+}
+
 export type Action =
   | REGISTER_USER_SUCCESS
   | REGISTER_USER_FAIL
@@ -150,3 +159,5 @@ export type Action =
   | LOAD_USER_FAIL
   | GET_FAVORITE_MOVIE_SUCCESS
   | GET_FAVORITE_MOVIE_FAIL
+  | SET_ALERT
+  | REMOVE_ALERT
