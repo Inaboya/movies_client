@@ -6,6 +6,7 @@ const Login = () => {
   return (
     <div className="register-container">
       <div className="register-wrapper">
+      <p className="register-paragraph-1">Watch anywhere. Cancel anytime.</p>
         <p className="register-paragraph-2">
           New Member?{" "}
           <Link to="/register" className="not-new-btn">
