@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import {  useDispatch } from "react-redux";
-import store, { AppDispatch } from "./store";
+import { AppDispatch } from "./store";
 import { loadUser } from "./actions/auth";
 import { ActionTypes } from "./actions/actionTypes";
 import setAuthToken from "./utils/setAuthToken";

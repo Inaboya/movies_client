@@ -1,10 +1,9 @@
-import { createStore, applyMiddleware, Dispatch } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import rootReducer from './reducer';
 import setAuthToken from './utils/setAuthToken';
 import { Action } from './actions/actions';
-import { type } from 'os';
 
 const initialState = {};
 
