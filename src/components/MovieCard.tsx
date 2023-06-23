@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./components.css"
+import { Link } from "react-router-dom";
 
 interface Props {
   movie: any;
@@ -7,7 +9,7 @@ interface Props {
 
 const MovieCard: React.FC<Props> = ({ movie }) => {
   return (
-    <a href="/movie/movie-details/{movie.id}">
+    <Link to={`/${movie.id}`}>
       <div className="box">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -20,7 +22,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
           <p className="release-date">{movie.release_date}</p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

@@ -2,7 +2,13 @@ import React from "react";
 import "./auth.css";
 import { Link } from "react-router-dom";
 
-const Register = () => {
+const Register: React.FC = () => {
+    const [formData, setFormData] = React.useState({
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
+    })
   return (
     <div className="register-container">
       <div className="register-wrapper">

@@ -1,74 +1,109 @@
 .navbar-container {
-    display: flex;
-    height: 3rem;
-    margin: 2rem 3rem;
-    /* padding: ; */
-    background-color: transparent;
-    align-items: center;
-    justify-content: space-between;
-    border: none;
-
+  display: flex;
+  height: 3rem;
+  margin: 2rem 3rem;
+  /* padding: ; */
+  background-color: transparent;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
 }
 
-
 .navbar-heading {
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 2rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 2rem;
 }
 
 .heading-link {
-    color: #e50914;
-    text-decoration: none;
+  color: #e50914;
+  text-decoration: none;
 }
 
 .page-links {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
-.logout-btn, .register-btn {
-    color: #fff;
-    text-decoration: none;
-    font-size: .8rem;
-    font-weight: 700;
+.logout-btn,
+.register-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .register-btn-container {
-    background-color: #E50914;
-    width: 5rem;
-    height: 3rem;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #e50914;
+  width: 5rem;
+  height: 3rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.logout-container, .register-btn-container {
-    background-color: #E50914;
-    width: 5rem;
-    height: 3rem;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.logout-container,
+.register-btn-container {
+  background-color: #e50914;
+  width: 5rem;
+  height: 3rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fav-container {
-    background-color: #fff;
-    width: 6rem;
-    height: 3rem;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
+  background-color: #fff;
+  width: 6rem;
+  height: 3rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fav-btn {
-    color: #E50914;
-    text-decoration: none;
-    font-size: .8rem;
-    font-weight: 700;
+  color: #e50914;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
+.box {
+  background-color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.box img {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.box-content {
+  padding: 6px 12px;
+}
+
+.box-content .title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.box-content .release-date {
+  color: #555555;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.loading {
+    margin: 0 auto;
+    font-size: 2rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -20,12 +20,10 @@ export interface MovieInitialState {
   error: string | null;
 }
 
-export interface RootState {
-    auth: any; // Update with the actual auth state type
-    movie: {
-      movies: any; // Update with the actual movies state type
-      loading: boolean;
-      movie: any; // Update with the actual movie state type
-      error: string | null;
-    };
+
+  export interface FormData {
+    name? : string;
+    email : string;
+    password: string;
+    password2: string;
   }

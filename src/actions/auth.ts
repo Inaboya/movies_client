@@ -1,6 +1,6 @@
 // import { Dispatch } from "redux";
 import api from "../utils/api";
-// import { RootState } from "../utils/typings";
+import { FormData } from "../utils/typings";
 import { ActionTypes } from "./actionTypes";
 
 export const loadUser =
@@ -20,7 +20,7 @@ export const loadUser =
     }
   };
 
-export const registerUser = (formData: any) => async (dispatch: any) => {
+export const registerUser = (formData: FormData) => async (dispatch: any) => {
   try {
     const res = await api.post("/users", formData);
     dispatch({
@@ -35,7 +35,7 @@ export const registerUser = (formData: any) => async (dispatch: any) => {
   }
 };
 
-export const loginUser = (formData: any) => async (dispatch: any) => {
+export const loginUser = (formData: FormData) => async (dispatch: any) => {
   try {
     const res = await api.post("/auth", formData);
     dispatch({
