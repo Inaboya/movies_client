@@ -47,7 +47,7 @@ const Navbar = () => {
     <div className="navbar-container">
       <h1 className="navbar-heading">
         <Link to="/" className="heading-link">
-        CINEHUB
+        CineHub
         </Link>
       </h1>
 
