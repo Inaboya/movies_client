@@ -13,7 +13,7 @@ api.interceptors.request.use(
   (res) => res,
   (err) => {
     if (err.response.status === 401) {
-      store.dispatch({ type: typeof ActionTypes.LOGOUT_USER });
+      store.dispatch({ type: ActionTypes.LOGOUT_USER });
     }
     return Promise.reject(err);
   }

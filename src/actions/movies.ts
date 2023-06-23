@@ -50,7 +50,7 @@ export const deleteMovie = (id: string) => async (dispatch: any) => {
 
 export const addFavoriteMovie = (formData: any) => async (dispatch: any) => {
   try {
-    const res = await api.put(`/movies/favorite-movies/${formData.id}`);
+    const res = await api.put(`/favorite-movies/${formData.id}`);
     dispatch({
       type: typeof ActionTypes.ADD_FAVORITE_MOVIE_SUCCESS,
       payload: res.data,
@@ -65,7 +65,7 @@ export const addFavoriteMovie = (formData: any) => async (dispatch: any) => {
 
 export const getFavoriteMovies = () => async (dispatch: any) => {
   try {
-    const res = await api.get("/movies/favorite-movies");
+    const res = await api.get("/favorite-movies");
     dispatch({
       type: typeof ActionTypes.GET_FAVORITE_MOVIES_SUCCESS,
       payload: res.data,
@@ -80,7 +80,7 @@ export const getFavoriteMovies = () => async (dispatch: any) => {
 
 export const deleteFavoriteMovie = (id: string) => async (dispatch: any) => {
   try {
-    const res = await api.delete(`/movies/favorite-movies/${id}`);
+    const res = await api.delete(`/favorite-movies/${id}`);
     dispatch({
       type: typeof ActionTypes.DELETE_FAVORITE_MOVIE_SUCCESS,
       payload: res.data,
@@ -109,3 +109,18 @@ export const updateMovieStarRating =
     }
   };
 
+export const getFavoriteMovie = (id: string) => async (dispatch: any) => {
+  try {
+    const res = await api.get(`/favorite-movies/${id}`);
+
+    dispatch({
+      type: typeof ActionTypes.ADD_FAVORITE_MOVIE_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: typeof ActionTypes.ADD_FAVORITE_MOVIE_FAIL,
+      payload: error.response.data.error,
+    });
+  }
+};

@@ -15,4 +15,17 @@ export interface AuthInitialState {
 
 export interface MovieInitialState {
   movies: any[];
+  movie: any | null;
+  loading: boolean;
+  error: string | null;
 }
+
+export interface RootState {
+    auth: any; // Update with the actual auth state type
+    movie: {
+      movies: any; // Update with the actual movies state type
+      loading: boolean;
+      movie: any; // Update with the actual movie state type
+      error: string | null;
+    };
+  }

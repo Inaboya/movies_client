@@ -1,24 +1,29 @@
 import React, { useEffect } from "react";
 import "./App.css";
+import { Provider, useDispatch } from "react-redux";
+import store, { AppDispatch } from "./store";
+import { loadUser } from "./actions/auth";
+import { ActionTypes } from "./actions/actionTypes";
+import setAuthToken from "./utils/setAuthToken";
 
 function App() {
-  // useEffect(() => {
-  //   if (localStorage.token) {
-  //     setAuthToken(localStorage.token);
-  //   }
+  const dispatch = useDispatch<AppDispatch>();
 
-  //   store.dispatch(loadUser());
+  useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
 
-  //   // Log user out from all tabs if they log out in one tab
+    dispatch(loadUser);
 
-  //   window.addEventListener('storage', () => {
-  //     if (!localStorage.token) store.dispatch({ type: LOGOUT });
-  //   })
-  // }, [])
+    window.addEventListener('storage', () => {
+      if (!localStorage.token) dispatch({ type: ActionTypes.LOGOUT_USER });
+    });
+  }, []);
   return (
-    <>
-      <h1>Movie app</h1>
-    </>
+    <Provider store={store}>
+      <h1>hello world</h1>
+    </Provider>
   );
 }
 

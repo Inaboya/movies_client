@@ -94,6 +94,16 @@ interface GET_FAVORITE_MOVIES_FAIL {
   payload: string;
 }
 
+interface GET_FAVORITE_MOVIE_SUCCESS {
+  type: typeof ActionTypes.GET_FAVORITE_MOVIE_SUCCESS;
+  payload: any;
+}
+
+interface GET_FAVORITE_MOVIE_FAIL {
+  type: typeof ActionTypes.GET_FAVORITE_MOVIE_FAIL;
+  payload: any;
+}
+
 interface DELETE_FAVORITE_MOVIE_SUCCESS {
   type: typeof ActionTypes.DELETE_FAVORITE_MOVIE_SUCCESS;
   payload: any;
@@ -137,4 +147,6 @@ export type Action =
   | UPDATE_MOVIE_STAR_RATING_SUCCESS
   | UPDATE_MOVIE_STAR_RATING_FAIL
   | LOAD_USER_SUCCESS
-  | LOAD_USER_FAIL;
+  | LOAD_USER_FAIL
+  | GET_FAVORITE_MOVIE_SUCCESS
+  | GET_FAVORITE_MOVIE_FAIL

@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Dispatch } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import thunk, { ThunkDispatch } from 'redux-thunk';
+import rootReducer from './reducer';
 import setAuthToken from './utils/setAuthToken';
+import { Action } from './actions/actions';
+import { type } from 'os';
 
 const initialState = {};
 
@@ -24,5 +26,12 @@ store.subscribe(() => {
         setAuthToken(token);
     }
 });
+
+// export type AppDispatch = typeof store.dispatch;
+
+export type AppDispatch = ThunkDispatch<RootState, null, Action>; // Define AppDispatch type
+
+export type RootState = ReturnType<typeof store.getState>; // Define RootState type
+
 
 export default store;

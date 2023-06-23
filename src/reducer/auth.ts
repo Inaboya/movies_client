@@ -73,5 +73,10 @@ const authReducer = (state = initialState, action: Action) => {
         loading: false,
         user: null,
       };
+
+    default:
+      return state;
   }
 };
+
+export default authReducer;
