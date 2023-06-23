@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Provider, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import store, { AppDispatch } from "./store";
 import { loadUser } from "./actions/auth";
 import { ActionTypes } from "./actions/actionTypes";
@@ -16,15 +16,12 @@ function App() {
 
     dispatch(loadUser);
 
-    window.addEventListener('storage', () => {
+    window.addEventListener("storage", () => {
       if (!localStorage.token) dispatch({ type: ActionTypes.LOGOUT_USER });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return (
-    <Provider store={store}>
-      <h1>hello world</h1>
-    </Provider>
-  );
+  return <h1>hello world</h1>;
 }
 
 export default App;
