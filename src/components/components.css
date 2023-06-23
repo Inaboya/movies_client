@@ -1,0 +1,74 @@
+.navbar-container {
+    display: flex;
+    height: 3rem;
+    margin: 3rem 8rem;
+    /* padding: ; */
+    background-color: transparent;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+
+}
+
+
+.navbar-heading {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+.heading-link {
+    color: #e50914;
+    text-decoration: none;
+}
+
+.page-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.logout-btn, .register-btn {
+    color: #fff;
+    text-decoration: none;
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.register-btn-container {
+    background-color: #E50914;
+    width: 5rem;
+    height: 3rem;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logout-container, .register-btn-container {
+    background-color: #E50914;
+    width: 5rem;
+    height: 3rem;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fav-container {
+    background-color: #fff;
+    width: 6rem;
+    height: 3rem;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.fav-btn {
+    color: #E50914;
+    text-decoration: none;
+    font-size: .8rem;
+    font-weight: 700;
+}
+

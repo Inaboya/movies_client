@@ -4,6 +4,8 @@ import {  useDispatch } from "react-redux";
 import { AppDispatch } from "./store";
 import { loadUser } from "./actions/auth";
 import { ActionTypes } from "./actions/actionTypes";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from "./components/Navbar"
 import setAuthToken from "./utils/setAuthToken";
 
 function App() {
@@ -21,7 +23,14 @@ function App() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return <h1>hello world</h1>;
+  return (
+    <>
+      <Router>
+        <Navbar />
+
+      </Router>
+    </>
+  );
 }
 
 export default App;
