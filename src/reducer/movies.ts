@@ -1,5 +1,5 @@
-import { ActionTypes } from "../actions/actionTypes";
-import { Action } from "../actions/actions";
+import { ADD_FAVORITE_MOVIE_FAIL, ADD_FAVORITE_MOVIE_SUCCESS, DELETE_FAVORITE_MOVIE_FAIL, DELETE_FAVORITE_MOVIE_SUCCESS, DELETE_MOVIE_FAIL, DELETE_MOVIE_SUCCESS, GET_FAVORITE_MOVIES_FAIL, GET_FAVORITE_MOVIES_SUCCESS, GET_FAVORITE_MOVIE_SUCCESS, GET_MOVIES_FAIL, GET_MOVIES_SUCCESS, GET_MOVIE_FAIL, GET_MOVIE_SUCCESS } from "../actions/actionTypes";
+// import { Action } from "../actions/actions";
 import { MovieInitialState } from "../utils/typings";
 
 const initialState = {
@@ -9,16 +9,16 @@ const initialState = {
   error: null,
 } as MovieInitialState;
 
-const movieReducer = (state = initialState, action: Action) => {
+const movieReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case ActionTypes.GET_MOVIES_SUCCESS:
+    case GET_MOVIES_SUCCESS:
       return {
         ...state,
         movies: action.payload,
         loading: false,
       };
 
-    case ActionTypes.GET_MOVIES_FAIL:
+    case GET_MOVIES_FAIL:
       return {
         ...state,
         movies: [],
@@ -26,14 +26,14 @@ const movieReducer = (state = initialState, action: Action) => {
         error: action.payload,
       };
 
-    case ActionTypes.GET_MOVIE_SUCCESS:
+    case GET_MOVIE_SUCCESS:
       return {
         ...state,
         movie: action.payload,
         loading: false,
       };
 
-    case ActionTypes.GET_MOVIE_FAIL:
+    case GET_MOVIE_FAIL:
       return {
         ...state,
         movie: null,
@@ -41,63 +41,63 @@ const movieReducer = (state = initialState, action: Action) => {
         error: action.payload,
       };
 
-    case ActionTypes.DELETE_MOVIE_SUCCESS:
+    case DELETE_MOVIE_SUCCESS:
       return {
         ...state,
         movies: state.movies.filter((movie) => movie._id !== action.payload),
         loading: false,
       };
 
-    case ActionTypes.DELETE_MOVIE_FAIL:
+    case DELETE_MOVIE_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
 
-    case ActionTypes.ADD_FAVORITE_MOVIE_SUCCESS:
+    case ADD_FAVORITE_MOVIE_SUCCESS:
       return {
         ...state,
         movie: action.payload,
         loading: false,
       };
 
-    case ActionTypes.ADD_FAVORITE_MOVIE_FAIL:
+    case ADD_FAVORITE_MOVIE_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
 
-    case ActionTypes.DELETE_FAVORITE_MOVIE_SUCCESS:
+    case DELETE_FAVORITE_MOVIE_SUCCESS:
       return {
         ...state,
         movie: action.payload,
         loading: false,
       };
 
-    case ActionTypes.DELETE_FAVORITE_MOVIE_FAIL:
+    case DELETE_FAVORITE_MOVIE_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
 
-    case ActionTypes.GET_FAVORITE_MOVIES_SUCCESS:
+    case GET_FAVORITE_MOVIES_SUCCESS:
       return {
         ...state,
         movies: action.payload,
         loading: false,
       };
 
-    case ActionTypes.GET_FAVORITE_MOVIES_FAIL:
+    case GET_FAVORITE_MOVIES_FAIL:
       return {
         ...state,
         movies: [],
         loading: false,
       };
 
-    case ActionTypes.GET_FAVORITE_MOVIE_SUCCESS:
+    case GET_FAVORITE_MOVIE_SUCCESS:
       return {
         ...state,
         movies: action.payload,

@@ -1,13 +1,13 @@
 import React from "react";
 import "./auth.css";
-import { Link, Navigate } from "react-router-dom";
-import PropTypes, { InferProps } from "prop-types";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { registerUser } from "../../actions/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { type } from "os";
 
 toast.configure();
 
@@ -39,13 +39,10 @@ const Register: React.FC<any> = ({ registerUser }) => {
         autoClose: 5000,
       });
 
-
       setLoading(false);
 
       return;
     }
-    console.log(123);
-
     if (password !== password2) {
       toast.error("Passwords do not match", {
         position: toast.POSITION.TOP_LEFT,
@@ -157,7 +154,7 @@ const Register: React.FC<any> = ({ registerUser }) => {
               <div className="button-container">
                 <button type="submit" className="btn-register">
                   {" "}
-                  Sign In
+                  Sign Up
                   {loading && (
                     <i
                       className="fas fa-spinner fa-spin"

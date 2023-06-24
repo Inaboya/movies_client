@@ -4,32 +4,30 @@ import PropTypes, { InferProps } from "prop-types";
 import { connect } from "react-redux";
 // import Spinner from '../layout/Spinner';
 
-interface AuthProps {
-  isAuthenticated: boolean;
-  loading: boolean;
-}
 
 interface PrivateRouteProps {
   component: React.ComponentType;
-  auth: AuthProps;
+  token: string;
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({
   component: Component,
-  auth: { isAuthenticated, loading },
+  token,
 }: PrivateRouteProps) => {
-  return <>{isAuthenticated ? <Component /> : <Navigate to="/login" />}</>;
+  console.log(token, 'wetin be this');
+  return <>{token ? <Component /> : <Navigate to="/login" />}</>;
 };
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-  }).isRequired,
+  token: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state: { auth: AuthProps }) => ({
-  auth: state.auth,
-});
+// const mapStateToProps = (state: { auth:  }) => ({
+//   auth: state.auth,
+// });
+
+const mapStateToProps = (state: any) => ({
+  token: state.auth.token,
+})
 
 export default connect(mapStateToProps)(PrivateRoute);

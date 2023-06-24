@@ -1,18 +1,27 @@
-import { ActionTypes } from "../actions/actionTypes";
-import { Action } from "../actions/actions";
+import {
+  LOAD_USER_FAIL,
+  LOAD_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  LOGIN_USER_SUCCESS,
+  LOGOUT_USER,
+  REGISTER_USER_FAIL,
+  REGISTER_USER_SUCCESS,
+} from "../actions/actionTypes";
+// import { Action } from "../actions/actions";
 import { AuthInitialState } from "../utils/typings";
 
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
-  loading: false,
   user: null,
   error: null,
 } as AuthInitialState;
 
-const authReducer = (state = initialState, action: Action) => {
+const authReducer = (state = initialState, action: any) => {
+  console.log(action.payload);
   switch (action.type) {
-    case ActionTypes.REGISTER_USER_SUCCESS:
+    case REGISTER_USER_SUCCESS:
+      // console.log({ action });
       return {
         ...state,
         user: action.payload,
@@ -20,7 +29,7 @@ const authReducer = (state = initialState, action: Action) => {
         loading: false,
       };
 
-    case ActionTypes.REGISTER_USER_FAIL:
+    case REGISTER_USER_FAIL:
       return {
         ...state,
         token: null,
@@ -30,7 +39,8 @@ const authReducer = (state = initialState, action: Action) => {
         error: action.payload,
       };
 
-    case ActionTypes.LOGIN_USER_SUCCESS:
+    case LOGIN_USER_SUCCESS:
+      console.log({ action });
       return {
         ...state,
         ...action.payload,
@@ -38,7 +48,7 @@ const authReducer = (state = initialState, action: Action) => {
         loading: false,
       };
 
-    case ActionTypes.LOGIN_USER_FAIL:
+    case LOGIN_USER_FAIL:
       return {
         ...state,
         token: null,
@@ -48,7 +58,7 @@ const authReducer = (state = initialState, action: Action) => {
         error: action.payload,
       };
 
-    case ActionTypes.LOAD_USER_SUCCESS:
+    case LOAD_USER_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
@@ -56,7 +66,7 @@ const authReducer = (state = initialState, action: Action) => {
         user: action.payload,
       };
 
-    case ActionTypes.LOAD_USER_FAIL:
+    case LOAD_USER_FAIL:
       return {
         ...state,
         token: null,
@@ -65,7 +75,7 @@ const authReducer = (state = initialState, action: Action) => {
         user: null,
       };
 
-    case ActionTypes.LOGOUT_USER:
+    case LOGOUT_USER:
       return {
         ...state,
         token: null,

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import {  useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store";
 import { loadUser } from "./actions/auth";
-import { ActionTypes } from "./actions/actionTypes";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {  LOGOUT_USER } from "./actions/actionTypes";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
@@ -16,6 +16,8 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    console.log("useEffect");
+    console.log("localStorage.token", localStorage.token);
     if (localStorage.token) {
       console.log("token found", localStorage.token);
 
@@ -25,7 +27,7 @@ function App() {
     dispatch(loadUser);
 
     window.addEventListener("storage", () => {
-      if (!localStorage.token) dispatch({ type: ActionTypes.LOGOUT_USER });
+      if (!localStorage.token) dispatch({ type: LOGOUT_USER });
     });
   }, []);
   return (
@@ -37,9 +39,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           {/* <Route path="/" element={PrivateComponent component={LandingPage}} />} */}
 
-          <Route path="/" element={<PrivateComponent component={LandingPage}/>} />
+          <Route
+            path="/"
+            element={<PrivateComponent component={LandingPage} />}
+          />
         </Routes>
-
       </Router>
     </>
   );

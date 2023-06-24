@@ -2,17 +2,14 @@ import React, { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
-import { logoutUser } from "../actions/auth";
+// import { logoutUser } from "../actions/auth";
 import "./components.css";
+import { LOGOUT_USER } from "../actions/actionTypes";
 
 const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    dispatch(logoutUser);
-  };
 
   const registerLink = (
     <div className="register-btn-container">
@@ -35,7 +32,7 @@ const Navbar = () => {
       <div className="logout-container">
         <Link
           to="#!"
-          onClick={handleClick}
+          onClick={() => dispatch({ type: LOGOUT_USER})}
           className="logout-btn"
         >
           Log Out

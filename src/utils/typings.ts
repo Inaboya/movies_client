@@ -25,5 +25,5 @@ export interface MovieInitialState {
     name? : string;
     email : string;
     password: string;
-    password2: string;
+    password2?: string;
   }

@@ -4,6 +4,7 @@ import { RootState } from "../../store";
 import { connect } from "react-redux";
 import { getMovies } from "../../actions/movies";
 import Movies from "../../components/Movies";
+import "./movies.css";
 
 interface LandingPageProps {
   getMovies: () => void;
@@ -21,7 +22,8 @@ const LandingPage: React.FC<LandingPageProps> = ({
     <>
       <div className="container">
         <div className="container-wrapper">
-            <Movies movies={movies} />
+            {/* <Movies movies={movies} /> */}
+            <h1>Hello world</h1>
         </div>
       </div>
     </>

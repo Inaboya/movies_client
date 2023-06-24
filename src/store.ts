@@ -1,13 +1,23 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Action } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducer';
 import setAuthToken from './utils/setAuthToken';
-import { Action } from './actions/actions';
+// import { Action } from './actions/actions';
 
 const initialState = {};
 
 const middleware = [thunk];
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['auth', 'movies'],
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
     rootReducer,
@@ -25,6 +35,9 @@ store.subscribe(() => {
         setAuthToken(token);
     }
 });
+
+
+// Persist redux state 
 
 // export type AppDispatch = typeof store.dispatch;
 
