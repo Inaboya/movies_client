@@ -1,8 +1,12 @@
 import React from "react";
 import "./auth.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+toast.configure();
+
+const Login: React.FC = () => {
   return (
     <div className="register-container">
       <div className="register-wrapper">

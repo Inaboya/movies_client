@@ -35,15 +35,13 @@ export const registerUser = (formData: FormData) => async (dispatch: any) => {
   try {
     const res = await api.post("/users", formData);
     
-    setAlert("User registered successfully", "success");
     dispatch({
-      type: typeof ActionTypes.REGISTER_USER_SUCCESS,
+      type:  ActionTypes.REGISTER_USER_SUCCESS,
       payload: res.data,
     });
   } catch (err: any) {
-    setAlert(err.response.data.error, "danger");
     dispatch({
-      type: typeof ActionTypes.REGISTER_USER_FAIL,
+      type: ActionTypes.REGISTER_USER_FAIL,
       payload: err.response.data.error,
     });
   }
@@ -53,12 +51,12 @@ export const loginUser = (formData: FormData) => async (dispatch: any) => {
   try {
     const res = await api.post("/auth", formData);
     dispatch({
-      type: typeof ActionTypes.LOGIN_USER_SUCCESS,
+      type:  ActionTypes.LOGIN_USER_SUCCESS,
       payload: res.data,
     });
   } catch (err: any) {
     dispatch({
-      type: typeof ActionTypes.LOGIN_USER_FAIL,
+      type:  ActionTypes.LOGIN_USER_FAIL,
       payload: err.response.data.msg,
     });
   }
@@ -66,6 +64,6 @@ export const loginUser = (formData: FormData) => async (dispatch: any) => {
 
 export const logoutUser = () => (dispatch: any) => {
   dispatch({
-    type: typeof ActionTypes.LOGOUT_USER,
+    type: ActionTypes.LOGOUT_USER,
   });
 };

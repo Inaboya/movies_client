@@ -56,18 +56,20 @@ const Register: React.FC<any> = ({ registerUser }) => {
         return;
       }
 
-      registerUser({ name, email, password, password2 });
+      const response = registerUser({ name, email, password, password2 });
+
+      console.log({response})
 
       console.log(123);
 
-      toast.success("Registration Successfull", {
-        position: toast.POSITION.TOP_LEFT,
-        autoClose: 5000,
-      })
+    //   toast.success("Registration Successfull", {
+    //     position: toast.POSITION.TOP_LEFT,
+    //     autoClose: 5000,
+    //   })
 
       setLoading(false);
 
-      navigate("/login");
+    //   navigate("/login");
     } catch (error) {
         toast.error("Registration Failed", {
           position: toast.POSITION.TOP_LEFT,
@@ -176,7 +178,7 @@ const Register: React.FC<any> = ({ registerUser }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
+//   setAlert: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
   // isAuthenticated: PropTypes.bool,
 };
