@@ -7,6 +7,7 @@ import { registerUser } from "../../actions/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { type } from "os";
 
 toast.configure();
 
@@ -32,53 +33,49 @@ const Register: React.FC<any> = ({ registerUser }) => {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      if (!name || !email || !password || !password) {
-        toast.error("Please enter all fields", {
-          position: toast.POSITION.TOP_LEFT,
-          autoClose: 5000,
-        });
+    if (!name || !email || !password || !password) {
+      toast.error("Please enter all fields", {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 5000,
+      });
 
-        // alert("Please enter all fields");
-
-        setLoading(false);
-
-        return;
-      }
-      console.log(123);
-
-      if (password !== password2) {
-        toast.error("Passwords do not match", {
-          position: toast.POSITION.TOP_LEFT,
-          autoClose: 5000,
-        });
-        setLoading(false);
-        return;
-      }
-
-      const response = registerUser({ name, email, password, password2 });
-
-      console.log({response})
-
-      console.log(123);
-
-    //   toast.success("Registration Successfull", {
-    //     position: toast.POSITION.TOP_LEFT,
-    //     autoClose: 5000,
-    //   })
 
       setLoading(false);
 
-    //   navigate("/login");
-    } catch (error) {
-        toast.error("Registration Failed", {
-          position: toast.POSITION.TOP_LEFT,
-          autoClose: 5000,
-        });
-
-    //   alert("Registration Failed");
-      setLoading(false);
+      return;
     }
+    console.log(123);
+
+    if (password !== password2) {
+      toast.error("Passwords do not match", {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 5000,
+      });
+      setLoading(false);
+      return;
+    }
+
+    const response = await registerUser({ name, email, password, password2 });
+
+    if (typeof response === "string") {
+      toast.error(response, {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 5000,
+      });
+
+      setLoading(false);
+
+      return;
+    }
+
+    toast.success("Registration successful", {
+      position: toast.POSITION.TOP_LEFT,
+      autoClose: 5000,
+    });
+
+    setLoading(false);
+
+    navigate("/login");
   };
 
   //   if (isAuthenticated) return <Navigate to="/" />;
@@ -178,7 +175,7 @@ const Register: React.FC<any> = ({ registerUser }) => {
 };
 
 Register.propTypes = {
-//   setAlert: PropTypes.func.isRequired,
+  //   setAlert: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
   // isAuthenticated: PropTypes.bool,
 };
