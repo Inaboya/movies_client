@@ -5,7 +5,7 @@ import { AuthInitialState } from "../utils/typings";
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: false,
-  loading: true,
+  loading: false,
   user: null,
   error: null,
 } as AuthInitialState;
@@ -15,7 +15,7 @@ const authReducer = (state = initialState, action: Action) => {
     case ActionTypes.REGISTER_USER_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        user: action.payload,
         isAuthenticated: false,
         loading: false,
       };

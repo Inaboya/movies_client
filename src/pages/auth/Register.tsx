@@ -1,8 +1,16 @@
 import React from "react";
 import "./auth.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import PropTypes, { InferProps } from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Register: React.FC = () => {
+toast.configure();
+
+const Register: React.FC<any> = ({ registerUser }) => {
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -10,25 +18,71 @@ const Register: React.FC = () => {
     password2: "",
   });
 
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = React.useState(false);
+
   const { name, email, password, password2 } = formData;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
-    if (password !== password2) {
-        setAlert && setAlert("Passwords do not match", "danger");
-    } else {
-        registerUser({ name, email, password });
+    try {
+      if (!name || !email || !password || !password) {
+        toast.error("Please enter all fields", {
+          position: toast.POSITION.TOP_LEFT,
+          autoClose: 5000,
+        });
+
+        // alert("Please enter all fields");
+
+        setLoading(false);
+
+        return;
+      }
+      console.log(123);
+
+      if (password !== password2) {
+        toast.error("Passwords do not match", {
+          position: toast.POSITION.TOP_LEFT,
+          autoClose: 5000,
+        });
+        setLoading(false);
+        return;
+      }
+
+      registerUser({ name, email, password, password2 });
+
+      console.log(123);
+
+      toast.success("Registration Successfull", {
+        position: toast.POSITION.TOP_LEFT,
+        autoClose: 5000,
+      })
+
+      setLoading(false);
+
+      navigate("/login");
+    } catch (error) {
+        toast.error("Registration Failed", {
+          position: toast.POSITION.TOP_LEFT,
+          autoClose: 5000,
+        });
+
+    //   alert("Registration Failed");
+      setLoading(false);
     }
-    }
+  };
+
+  //   if (isAuthenticated) return <Navigate to="/" />;
   return (
     <div className="register-container">
       <div className="register-wrapper">
-        <p className="register-paragraph-1">Watch anywhere. Cancel anytime.</p>
         <p className="register-paragraph-2">
           Not new?{" "}
           <Link to="/login" className="not-new-btn">
@@ -36,7 +90,7 @@ const Register: React.FC = () => {
           </Link>
         </p>
 
-        <form className="form-container">
+        <form className="form-container" onSubmit={handleSubmit}>
           <div className="form-wrapper">
             <div className="form-group">
               <div className="form-control">
@@ -44,7 +98,13 @@ const Register: React.FC = () => {
                   Name
                 </label>
                 <div className="form-input">
-                  <input type="text" placeholder="Enter your name" />
+                  <input
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={handleChange}
+                    placeholder="Enter your name"
+                  />
                 </div>
               </div>
 
@@ -54,7 +114,13 @@ const Register: React.FC = () => {
                 </label>
 
                 <div className="form-input">
-                  <input type="email" placeholder="Enter your email" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                  />
                 </div>
               </div>
 
@@ -63,7 +129,13 @@ const Register: React.FC = () => {
                   Password
                 </label>
                 <div className="form-input">
-                  <input type="password" placeholder="Enter your password" />
+                  <input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    placeholder="Enter your password"
+                  />
                 </div>
               </div>
 
@@ -73,7 +145,13 @@ const Register: React.FC = () => {
                 </label>
 
                 <div className="form-input">
-                  <input type="password" placeholder="Confirm your password" />
+                  <input
+                    type="password"
+                    name="password2"
+                    value={password2}
+                    onChange={handleChange}
+                    placeholder="Confirm your password"
+                  />
                 </div>
               </div>
 
@@ -81,6 +159,12 @@ const Register: React.FC = () => {
                 <button type="submit" className="btn-register">
                   {" "}
                   Sign In
+                  {loading && (
+                    <i
+                      className="fas fa-spinner fa-spin"
+                      aria-hidden="true"
+                    ></i>
+                  )}
                 </button>
               </div>
             </div>
@@ -91,4 +175,14 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  // isAuthenticated: PropTypes.bool,
+};
+
+// const mapStateToProps = (state: { auth: AuthProps }) => ({
+//   loading: state.auth.loading,
+// });
+
+export default connect(null, { registerUser })(Register);
