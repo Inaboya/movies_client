@@ -14,17 +14,13 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   component: Component,
   token,
 }: PrivateRouteProps) => {
-  console.log(token, 'wetin be this');
+  // console.log(token, 'wetin be this');
   return <>{token ? <Component /> : <Navigate to="/login" />}</>;
 };
 
 PrivateRoute.propTypes = {
   token: PropTypes.string.isRequired,
 };
-
-// const mapStateToProps = (state: { auth:  }) => ({
-//   auth: state.auth,
-// });
 
 const mapStateToProps = (state: any) => ({
   token: state.auth.token,

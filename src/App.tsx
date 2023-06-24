@@ -16,10 +16,7 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log("localStorage.token", localStorage.token);
     if (localStorage.token) {
-      console.log("token found", localStorage.token);
 
       setAuthToken(localStorage.token);
     }

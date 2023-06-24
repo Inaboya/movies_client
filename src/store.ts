@@ -20,7 +20,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
-    rootReducer,
+    persistedReducer,
     initialState,
     composeWithDevTools(applyMiddleware(...middleware))
 )
@@ -36,6 +36,8 @@ store.subscribe(() => {
     }
 });
 
+const persistor = persistStore(store);
+
 
 // Persist redux state 
 
@@ -46,4 +48,4 @@ export type AppDispatch = ThunkDispatch<RootState, null, Action>; // Define AppD
 export type RootState = ReturnType<typeof store.getState>; // Define RootState type
 
 
-export default store;
+export { store, persistor};
