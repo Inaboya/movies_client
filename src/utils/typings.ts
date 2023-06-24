@@ -17,7 +17,7 @@ export interface MovieInitialState {
   movies: any[];
   favoriteMovies: any[];
   movie: any | null;
-  loading: boolean;
+  // loading: boolean;
   error: string | null;
 }
 

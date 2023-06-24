@@ -24,7 +24,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
         <p className="card-content-title">{movie.release_date}</p>
 
         <div className="card-footer">
-          <Link to={`/${movie.id}`} className="card-footer-link">
+          <Link to={`/${movie._id}`} className="card-footer-link">
             View Details
           </Link>
         </div>

@@ -1,19 +1,128 @@
 .container {
-    width: 100%;
-    height: 100%;
-    /* background-color: red; */
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
 }
 
 .no-fav-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
 }
 
 .no-favorite-movies {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
 }
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
+  /* width: 80%; */
+  height: 80vh;
+  border: #fff;
+}
+
+.movie-details-container {
+  /* width: 70%; */
+  width: 50%;
+  height: 30rem;
+  /* background: #f5f5f5; */
+  border-radius: 3px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.movie-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
+  /* background: red; */
+  width: 100%;
+  height: 100%;
+}
+
+.movie-details-btn-container {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  /* justify-content: center;
+  align-items: flex-end; */
+  /* background-color: #e50914; */
+  margin-bottom: 0;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.btn-1 {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-2 {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-details-1,
+.btn-details-1:active,
+.btn-details-1:visited {
+  background-color: #e50914;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.btn-details-2,
+.btn-details-2:active,
+.btn-details-2:visited {
+  background-color: #669933;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.image-container {
+  width: 12.3rem;
+  height: 27rem;
+}
+
+.movie-card-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.star-container {
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+

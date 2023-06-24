@@ -1,7 +1,24 @@
 // import { Dispatch } from "redux";
 import api from "../utils/api";
 // import { Action } from './actions';
-import { ADD_FAVORITE_MOVIE_FAIL, ADD_FAVORITE_MOVIE_SUCCESS, DELETE_FAVORITE_MOVIE_FAIL, DELETE_FAVORITE_MOVIE_SUCCESS, DELETE_MOVIE_FAIL, DELETE_MOVIE_SUCCESS, GET_FAVORITE_MOVIES_FAIL, GET_FAVORITE_MOVIES_SUCCESS, GET_MOVIES_FAIL, GET_MOVIES_SUCCESS, GET_MOVIE_FAIL, GET_MOVIE_SUCCESS, UPDATE_MOVIE_STAR_RATING_FAIL, UPDATE_MOVIE_STAR_RATING_SUCCESS } from "./actionTypes";
+import {
+  ADD_FAVORITE_MOVIE_FAIL,
+  ADD_FAVORITE_MOVIE_SUCCESS,
+  DELETE_FAVORITE_MOVIE_FAIL,
+  DELETE_FAVORITE_MOVIE_SUCCESS,
+  DELETE_MOVIE_FAIL,
+  DELETE_MOVIE_SUCCESS,
+  GET_FAVORITE_MOVIES_FAIL,
+  GET_FAVORITE_MOVIES_SUCCESS,
+  GET_FAVORITE_MOVIE_FAIL,
+  GET_FAVORITE_MOVIE_SUCCESS,
+  GET_MOVIES_FAIL,
+  GET_MOVIES_SUCCESS,
+  GET_MOVIE_FAIL,
+  GET_MOVIE_SUCCESS,
+  UPDATE_MOVIE_STAR_RATING_FAIL,
+  UPDATE_MOVIE_STAR_RATING_SUCCESS,
+} from "./actionTypes";
 
 export const getMovies = () => async (dispatch: any) => {
   try {
@@ -19,13 +36,16 @@ export const getMovies = () => async (dispatch: any) => {
 };
 
 export const getMovie = (id: string) => async (dispatch: any) => {
+  console.log({ id }, 'id');
   try {
     const res = await api.get(`/movies/${id}`);
+    console.log(res.data, "res.data");
     dispatch({
       type: GET_MOVIE_SUCCESS,
       payload: res.data,
     });
   } catch (err: any) {
+    console.log("error");
     dispatch({
       type: GET_MOVIE_FAIL,
       payload: err.response.data.error,
@@ -67,13 +87,13 @@ export const getFavoriteMovies = () => async (dispatch: any) => {
   console.log("getFavoriteMovies");
   try {
     const res = await api.get("/favorite-movies");
-    console.log(res, "res.data")
+    console.log(res, "res.data");
     dispatch({
       type: GET_FAVORITE_MOVIES_SUCCESS,
       payload: res.data,
     });
   } catch (err: any) {
-    console.log(err, 'err')
+    console.log(err, "err");
     dispatch({
       type: GET_FAVORITE_MOVIES_FAIL,
       // payload: err.response.data.error,
@@ -117,12 +137,12 @@ export const getFavoriteMovie = (id: string) => async (dispatch: any) => {
     const res = await api.get(`/favorite-movies/${id}`);
 
     dispatch({
-      type: ADD_FAVORITE_MOVIE_SUCCESS,
+      type: GET_FAVORITE_MOVIE_SUCCESS,
       payload: res.data,
     });
   } catch (error: any) {
     dispatch({
-      type: ADD_FAVORITE_MOVIE_FAIL,
+      type: GET_FAVORITE_MOVIE_FAIL,
       payload: error.response.data.error,
     });
   }
