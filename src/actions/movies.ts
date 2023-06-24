@@ -48,9 +48,9 @@ export const deleteMovie = (id: string) => async (dispatch: any) => {
   }
 };
 
-export const addFavoriteMovie = (formData: any) => async (dispatch: any) => {
+export const addFavoriteMovie = (id: string) => async (dispatch: any) => {
   try {
-    const res = await api.put(`/favorite-movies/${formData.id}`);
+    const res = await api.post(`/favorite-movies/${id}`);
     dispatch({
       type: ADD_FAVORITE_MOVIE_SUCCESS,
       payload: res.data,
@@ -64,16 +64,19 @@ export const addFavoriteMovie = (formData: any) => async (dispatch: any) => {
 };
 
 export const getFavoriteMovies = () => async (dispatch: any) => {
+  console.log("getFavoriteMovies");
   try {
     const res = await api.get("/favorite-movies");
+    console.log(res, "res.data")
     dispatch({
       type: GET_FAVORITE_MOVIES_SUCCESS,
       payload: res.data,
     });
   } catch (err: any) {
+    console.log(err, 'err')
     dispatch({
       type: GET_FAVORITE_MOVIES_FAIL,
-      payload: err.response.data.error,
+      // payload: err.response.data.error,
     });
   }
 };

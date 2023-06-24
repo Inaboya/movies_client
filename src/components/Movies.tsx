@@ -6,11 +6,17 @@ interface Props {
 }
 
 const Movies: React.FC<Props> = ({ movies }) => {
+  console.log(movies, "movies from movie component");
+  // const 
   return (
-    <div className="movies">
-      {movies &&
-        movies.map((movie: any) => <MovieCard key={movie.id} movie={movie} />)}
-    </div>
+   <div className="movie-container">
+    
+   {
+    movies && movies.map((movie: any) => (
+      <MovieCard key={movie.id} movie={movie} />
+    ))
+   }
+   </div>
   );
 };
 

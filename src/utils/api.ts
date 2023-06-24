@@ -1,5 +1,5 @@
 import axios from "axios";
-import {store} from "../store";
+import store from "../store";
 import {  LOGOUT_USER } from "../actions/actionTypes";
 
 const api = axios.create({

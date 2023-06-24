@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware, Action } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducer';
 import setAuthToken from './utils/setAuthToken';
 // import { Action } from './actions/actions';
@@ -11,16 +9,9 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['auth', 'movies'],
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
-    persistedReducer,
+    rootReducer,
     initialState,
     composeWithDevTools(applyMiddleware(...middleware))
 )
@@ -36,8 +27,6 @@ store.subscribe(() => {
     }
 });
 
-const persistor = persistStore(store);
-
 
 // Persist redux state 
 
@@ -48,4 +37,4 @@ export type AppDispatch = ThunkDispatch<RootState, null, Action>; // Define AppD
 export type RootState = ReturnType<typeof store.getState>; // Define RootState type
 
 
-export { store, persistor};
+export default store;

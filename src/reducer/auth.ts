@@ -18,7 +18,7 @@ const initialState = {
 } as AuthInitialState;
 
 const authReducer = (state = initialState, action: any) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case REGISTER_USER_SUCCESS:
       // console.log({ action });

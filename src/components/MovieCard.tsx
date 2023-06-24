@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./components.css"
+import "./components.css";
 import { Link } from "react-router-dom";
+import "./components.css";
 
 interface Props {
   movie: any;
@@ -9,20 +10,26 @@ interface Props {
 
 const MovieCard: React.FC<Props> = ({ movie }) => {
   return (
-    <Link to={`/${movie.id}`}>
-      <div className="box">
+    <div className="movie-card">
+      <div className="image-container">
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
-          width="400"
-          height="300"
+          className="movie-card-image"
         />
-        <div className="box-content">
-          <h2 className="title">{movie.title}</h2>
-          <p className="release-date">{movie.release_date}</p>
+      </div>
+
+      <div className="card-content">
+        <h2 className="card-content-title">{movie.title}</h2>
+        <p className="card-content-title">{movie.release_date}</p>
+
+        <div className="card-footer">
+          <Link to={`/${movie.id}`} className="card-footer-link">
+            View Details
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

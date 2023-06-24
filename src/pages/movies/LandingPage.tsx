@@ -13,8 +13,9 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({
   getMovies,
-  movies: { movies },
+  movies,
 }) => {
+  console.log(movies, "movies landing page")
   useEffect(() => {
     getMovies && getMovies();
   }, [getMovies]);
@@ -22,8 +23,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
     <>
       <div className="container">
         <div className="container-wrapper">
-            {/* <Movies movies={movies} /> */}
-            <h1>Hello world</h1>
+            <Movies movies={movies} />
         </div>
       </div>
     </>
@@ -36,7 +36,7 @@ LandingPage.propTypes = {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  movies: state.movie.movies,
+  movies: state.movies.movies,
 });
 
 export default connect(mapStateToProps, { getMovies })(LandingPage);
