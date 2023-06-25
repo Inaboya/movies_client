@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Movies: React.FC<Props> = ({ movies }) => {
-  console.log(movies, "movies from movie component");
+  // console.log(movies, "movies from movie component");
   // const 
   return (
    <div className="movie-container">
