@@ -28,7 +28,7 @@ const initialState = {
 } as MovieInitialState;
 
 const movieReducer = (state = initialState, action: any) => {
-  console.log(action, "where are you?");
+  console.log(action.payload, "where are you?");
   // console.log(state, "state");
   switch (action.type) {
     case GET_MOVIES_SUCCESS:
@@ -78,7 +78,7 @@ const movieReducer = (state = initialState, action: any) => {
     case ADD_FAVORITE_MOVIE_SUCCESS:
       return {
         ...state,
-        favoriteMovies: [action.payload, ...state.movies],
+        favoriteMovies: [action.payload, ...state.favoriteMovies],
         // loading: false,
       };
 
@@ -108,7 +108,7 @@ const movieReducer = (state = initialState, action: any) => {
     case GET_FAVORITE_MOVIES_SUCCESS:
       return {
         ...state,
-        favoriteMovies: [...action.payload.data],
+        favoriteMovies: action.payload,
         // loading: false,
       };
 

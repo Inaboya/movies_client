@@ -20,6 +20,8 @@ import {
   UPDATE_MOVIE_STAR_RATING_SUCCESS,
 } from "./actionTypes";
 
+import { FormData, MovieData } from "../utils/typings";
+
 export const getMovies = () => async (dispatch: any) => {
   try {
     const res = await api.get("/movies");
@@ -36,13 +38,13 @@ export const getMovies = () => async (dispatch: any) => {
 };
 
 export const getMovie = (id: string) => async (dispatch: any) => {
-  console.log({ id }, 'id');
+  console.log(id, "id");
   try {
     const res = await api.get(`/movies/${id}`);
-    console.log(res.data, "res.data");
+    console.log(res.data.data[0], "res.data");
     dispatch({
       type: GET_MOVIE_SUCCESS,
-      payload: res.data,
+      payload: res.data.data[0],
     });
   } catch (err: any) {
     console.log("error");
@@ -68,9 +70,10 @@ export const deleteMovie = (id: string) => async (dispatch: any) => {
   }
 };
 
-export const addFavoriteMovie = (id: string) => async (dispatch: any) => {
+export const addFavoriteMovie = (formData: MovieData) => async (dispatch: any) => {
+  const { movieId, starRating } = formData;
   try {
-    const res = await api.post(`/favorite-movies/${id}`);
+    const res = await api.post(`/favorite-movies`, { movieId, starRating});
     dispatch({
       type: ADD_FAVORITE_MOVIE_SUCCESS,
       payload: res.data,
@@ -84,13 +87,12 @@ export const addFavoriteMovie = (id: string) => async (dispatch: any) => {
 };
 
 export const getFavoriteMovies = () => async (dispatch: any) => {
-  console.log("getFavoriteMovies");
   try {
     const res = await api.get("/favorite-movies");
-    console.log(res, "res.data");
+    console.log(res.data.data, "res.data");
     dispatch({
       type: GET_FAVORITE_MOVIES_SUCCESS,
-      payload: res.data,
+      payload: res.data.data,
     });
   } catch (err: any) {
     console.log(err, "err");
@@ -117,9 +119,9 @@ export const deleteFavoriteMovie = (id: string) => async (dispatch: any) => {
 };
 
 export const updateMovieStarRating =
-  (formData: any) => async (dispatch: any) => {
+  (formData: MovieData) => async (dispatch: any) => {
     try {
-      const res = await api.patch(`/movies/${formData.id}`, formData);
+      const res = await api.patch(`/movies/${formData.movieId}`, formData);
       dispatch({
         type: UPDATE_MOVIE_STAR_RATING_SUCCESS,
         payload: res.data,

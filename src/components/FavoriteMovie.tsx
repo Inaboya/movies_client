@@ -5,7 +5,7 @@ interface Props {
   movies: any;
 }
 
-const Movies: React.FC<Props> = ({ movies }) => {
+const FavoriteMovies: React.FC<Props> = ({ movies }) => {
   console.log(movies, "movies from movie component");
   // const 
   return (
@@ -13,11 +13,11 @@ const Movies: React.FC<Props> = ({ movies }) => {
 
    {
     movies && movies.map((movie: any) => (
-      <MovieCard key={movie._id} movie={movie} />
+      <MovieCard key={movie._id} movie={movie.movieId} />
     ))
    }
    </div>
   );
 };
 
-export default Movies;
+export default FavoriteMovies;

@@ -15,7 +15,6 @@ const LandingPage: React.FC<LandingPageProps> = ({
   getMovies,
   movies,
 }) => {
-  console.log(movies, "movies landing page")
   useEffect(() => {
     getMovies && getMovies();
   }, [getMovies]);

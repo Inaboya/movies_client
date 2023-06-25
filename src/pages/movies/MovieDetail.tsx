@@ -2,26 +2,44 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { RootState } from "../../store";
-import { getMovie, updateMovieStarRating } from "../../actions/movies";
+import {
+  getMovie,
+  updateMovieStarRating,
+  addFavoriteMovie,
+} from "../../actions/movies";
 import "./movies.css";
 import { connect } from "react-redux";
 import { starRating } from "../../utils/func";
 import Modal from "../../components/Modal";
+import { toast } from "react-toastify";
+import { MovieData } from "../../utils/typings";
 
 interface MovieDetailProps {
   movie: any;
-  //   getMovie: (id: string) => void;
+  getMovie: (id: string) => void;
+  addFavoriteMovie: (formData: MovieData) => void;
+  updateMovieStarRating: (form: MovieData) => void;
 }
 
-const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
+const MovieDetail: React.FC<MovieDetailProps> = ({
+  movie,
+  getMovie,
+  addFavoriteMovie,
+  updateMovieStarRating,
+}) => {
+    console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
   const [showModal, setShowModal] = React.useState(false);
   const [valueRating, setValueRating] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
+
   useEffect(() => {
     getMovie && getMovie(id!);
-  }, [id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+//   const { poster_path } = movie;
 
   const handleModal = () => {
     setShowModal(true);
@@ -33,9 +51,26 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
 
   const handleStarRating = () => {
     setLoading(true);
-    updateMovieStarRating({ id, valueRating });
+    updateMovieStarRating({
+      movieId: id,
+      starRating: valueRating,
+    } as MovieData);
     setLoading(false);
     setShowModal(false);
+  };
+
+  const handleHandleFavorite = () => {
+    setLoading(true);
+    // const res = addFavoriteMovie();
+
+    addFavoriteMovie({ movieId: id!, starRating: valueRating } as MovieData);
+    // console.log({ res });
+
+    toast.success("Movie added to WatchList", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000,
+    });
+    setLoading(false);
   };
 
   return (
@@ -62,11 +97,11 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
                   <button className="modal-btn" onClick={handleStarRating}>
                     Rate
                     {loading && (
-                    <i
-                      className="fas fa-spinner fa-spin"
-                      aria-hidden="true"
-                    ></i>
-                  )}
+                      <i
+                        className="fas fa-spinner fa-spin"
+                        aria-hidden="true"
+                      ></i>
+                    )}
                   </button>
                 </div>
               </Modal>
@@ -76,23 +111,27 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
         <div className="movie-details-wrapper">
           <div className="image-container">
             <img
-              src={`https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg`}
+              src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
               alt="{movie.title}"
               className="movie-card-image"
             />
           </div>
 
           <div className="star-container">
-            <p className="star-rating-p">{starRating(5)}</p>
+            <p className="star-rating-p">{starRating(0)}</p>
           </div>
 
           <div className="movie-details-btn-container">
             <div className="btn-1">
-              <button className="btn-details-1" onClick={handleModal}>Rate Movie</button>
+              <button className="btn-details-1" onClick={handleModal}>
+                Rate Movie
+              </button>
             </div>
 
             <div className="btn-2">
-              <button className="btn-details-2">Add to Favorite</button>
+              <button className="btn-details-2" onClick={handleHandleFavorite}>
+                Add to Favorite
+              </button>
             </div>
           </div>
         </div>
@@ -103,11 +142,17 @@ const MovieDetail: React.FC<MovieDetailProps> = ({ movie }) => {
 
 MovieDetail.propTypes = {
   movie: PropTypes.object.isRequired,
-  //   getMovie: PropTypes.func.isRequired,
+  getMovie: PropTypes.func.isRequired,
+  addFavoriteMovie: PropTypes.func.isRequired,
+  updateMovieStarRating: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
-  movie: state.movies.movie ? state.movies.movie : {},
+  movie: state.movies.movie,
 });
 
-export default connect(mapStateToProps, { getMovie })(MovieDetail);
+export default connect(mapStateToProps, {
+  getMovie,
+  addFavoriteMovie,
+  updateMovieStarRating,
+})(MovieDetail);

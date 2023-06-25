@@ -28,3 +28,8 @@ export interface MovieInitialState {
     password: string;
     password2?: string;
   }
+
+  export interface MovieData {
+    movieId: string;
+    starRating: number;
+  }

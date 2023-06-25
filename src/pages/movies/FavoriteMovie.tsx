@@ -5,6 +5,7 @@ import "./movies.css";
 import { RootState } from "../../store";
 import { connect } from "react-redux";
 import { getFavoriteMovies } from "../../actions/movies";
+import FavoriteMovies from "../../components/FavoriteMovie";
 
 interface FavoriteMovieProps {
   getFavoriteMovies: () => void;
@@ -30,7 +31,7 @@ const FavoriteMovie: React.FC<FavoriteMovieProps> = ({
           
         ) : (
           <div className="container-wrapper">
-            <Movies movies={favoriteMovies} />
+            <FavoriteMovies movies={favoriteMovies} />
           </div>
         )}
       </div>

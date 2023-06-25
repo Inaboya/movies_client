@@ -13,6 +13,7 @@ import PrivateComponent from "./components/PrivateComponent";
 import LandingPage from "./pages/movies/LandingPage";
 import FavoriteMovie from "./pages/movies/FavoriteMovie";
 import MovieDetail from "./pages/movies/MovieDetail";
+import MovieDetailsFavorite from "./pages/movies/MovieDetailsFavorite";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,6 +51,11 @@ function App() {
           <Route
             path="/:id"
             element={<PrivateComponent component={MovieDetail} />}
+          />
+
+          <Route
+            path="/favorite-movies/:id"
+            element={<PrivateComponent component={MovieDetailsFavorite} />}
           />
         </Routes>
       </Router>
