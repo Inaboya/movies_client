@@ -33,9 +33,11 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
+  // call getFavoriteMovie if movie.starRating has been changed
+
   useEffect(() => {
     getFavoriteMovie && getFavoriteMovie(id!);
-  }, [getFavoriteMovie, id]);
+  }, [getFavoriteMovie, id, movie?.starRating]);
 
   const handleModal = () => {
     setShowModal(true);
@@ -56,6 +58,7 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
       position: toast.POSITION.TOP_CENTER,
       autoClose: 2000,
     });
+    // getFavoriteMovie && getFavoriteMovie(id!);
     setLoading(false);
     setShowModal(false);
   };
