@@ -10,7 +10,7 @@ import {
 import "./movies.css";
 import { connect } from "react-redux";
 import { starRating } from "../../utils/func";
-import Modal from "../../components/Modal";
+// import Modal from "../../components/Modal";
 import { toast } from "react-toastify";
 import { MovieData } from "../../utils/typings";
 
@@ -27,22 +27,22 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
   addFavoriteMovie,
   updateMovieStarRating,
 }) => {
-  console.log(movie, "movie detail");
+  // console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
-  //   const [starRatingValue, setStarRatingValue] =  React.useState() as undefined | string;
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     getMovie && getMovie(id!);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getMovie, id]);
 
   const handleHandleFavorite = () => {
     setLoading(true);
+    // const res = addFavoriteMovie();
 
     addFavoriteMovie({ movieId: id!, starRating: 0 } as MovieData);
+    // console.log({ res });
 
     toast.success("Movie added to WatchList", {
       position: toast.POSITION.TOP_CENTER,
@@ -53,7 +53,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
 
   const routeBack = () => {
     navigate(-1);
-  }
+  };
 
   return (
     <div className="details-container">
@@ -73,12 +73,14 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
 
           <div className="movie-details-btn-container">
             <div className="btn-1">
-              <button className="btn-details-1" onClick={routeBack}>Back</button>
+              <button className="btn-details-1" onClick={routeBack}>
+                Back
+              </button>
             </div>
 
             <div className="btn-2">
               <button className="btn-details-2" onClick={handleHandleFavorite}>
-                Add to Favorite{" "}
+                Add to WatchList{" "}
                 {loading && (
                   <i className="fas fa-spinner fa-spin" aria-hidden="true"></i>
                 )}
