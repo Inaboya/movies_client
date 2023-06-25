@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import Movies from "../../components/Movies";
+// import Movies from "../../components/Movies";
 import "./movies.css";
 import { RootState } from "../../store";
 import { connect } from "react-redux";
@@ -16,6 +16,7 @@ const FavoriteMovie: React.FC<FavoriteMovieProps> = ({
   favoriteMovies,
   getFavoriteMovies,
 }) => {
+  console.log(favoriteMovies, "favorite movies");
 
   useEffect(() => {
     getFavoriteMovies && getFavoriteMovies();

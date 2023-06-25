@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { RootState } from "../../store";
 import {
@@ -30,15 +30,14 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
   console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
-//   const [starRatingValue, setStarRatingValue] =  React.useState() as undefined | string;
+  //   const [starRatingValue, setStarRatingValue] =  React.useState() as undefined | string;
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMovie && getMovie(id!);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
 
   const handleHandleFavorite = () => {
     setLoading(true);
@@ -51,6 +50,10 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
     });
     setLoading(false);
   };
+
+  const routeBack = () => {
+    navigate(-1);
+  }
 
   return (
     <div className="details-container">
@@ -70,14 +73,15 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
 
           <div className="movie-details-btn-container">
             <div className="btn-1">
-              <button className="btn-details-1">
-                Back
-              </button>
+              <button className="btn-details-1" onClick={routeBack}>Back</button>
             </div>
 
             <div className="btn-2">
               <button className="btn-details-2" onClick={handleHandleFavorite}>
-                Add to Favorite
+                Add to Favorite{" "}
+                {loading && (
+                  <i className="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                )}
               </button>
             </div>
           </div>

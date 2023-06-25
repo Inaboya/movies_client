@@ -109,14 +109,14 @@ const movieReducer = (state = initialState, action: any) => {
     case GET_FAVORITE_MOVIES_SUCCESS:
       return {
         ...state,
-        favoriteMovies: action.payload,
+        favoriteMovies: [action.payload],
         // loading: false,
       };
 
     case GET_FAVORITE_MOVIES_FAIL:
       return {
         ...state,
-        movies: [],
+        favoriteMovies: [],
         // loading: false,
       };
 
@@ -130,7 +130,7 @@ const movieReducer = (state = initialState, action: any) => {
     case GET_FAVORITE_MOVIE_FAIL:
       return {
         ...state,
-        movie: null,
+        favoriteMovie: null,
       };
 
     case UPDATE_MOVIE_STAR_RATING_SUCCESS:

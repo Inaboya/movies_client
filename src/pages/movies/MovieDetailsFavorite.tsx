@@ -1,31 +1,42 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { RootState } from "../../store";
-import { getFavoriteMovie, updateMovieStarRating } from "../../actions/movies";
+import {
+  getFavoriteMovie,
+  updateMovieStarRating,
+  deleteFavoriteMovie,
+} from "../../actions/movies";
 import "./movies.css";
 import { connect } from "react-redux";
 import { starRating } from "../../utils/func";
 import { MovieData } from "../../utils/typings";
 import Modal from "../../components/Modal";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
 
 interface MovieDetailProps {
   movie: any;
   getFavoriteMovie: (id: string) => void;
   updateMovieStarRating: (form: MovieData) => void;
+  deleteFavoriteMovie: (id: string) => void;
 }
 
 const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
   movie,
   getFavoriteMovie,
   updateMovieStarRating,
+  deleteFavoriteMovie,
 }) => {
-  console.log(movie, "movie detail")
+  console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
   const [showModal, setShowModal] = React.useState(false);
   const [valueRating, setValueRating] = React.useState(0);
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getFavoriteMovie && getFavoriteMovie(id!);
@@ -47,6 +58,17 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
     } as MovieData);
     setLoading(false);
     setShowModal(false);
+  };
+
+  const removeFromFavorite = () => {
+    setLoading(true);
+    deleteFavoriteMovie(id!);
+    toast.success("Movie removed from WatchList", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000,
+    });
+    navigate("/");
+    setLoading(false);
   };
   return (
     <div className="details-container">
@@ -140,11 +162,18 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
 
           <div className="movie-details-btn-container">
             <div className="btn-1">
-              <button className="btn-details-1" onClick={handleModal}>Rate Movie</button>
+              <button className="btn-details-1" onClick={handleModal}>
+                Rate Movie
+              </button>
             </div>
 
             <div className="btn-2">
-              <button className="btn-details-2">Remove from Favorite</button>
+              <button className="btn-details-2" onClick={removeFromFavorite}>
+                Remove from Favorite{" "}
+                {loading && (
+                  <i className="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                )}
+              </button>
             </div>
           </div>
         </div>
@@ -157,10 +186,15 @@ MovieDetailsFavorite.propTypes = {
   movie: PropTypes.object.isRequired,
   getFavoriteMovie: PropTypes.func.isRequired,
   updateMovieStarRating: PropTypes.func.isRequired,
+  deleteFavoriteMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state: RootState) => ({
   movie: state.movies.favoriteMovie,
 });
 
-export default connect(mapStateToProps, { getFavoriteMovie,  updateMovieStarRating})(MovieDetailsFavorite);
+export default connect(mapStateToProps, {
+  getFavoriteMovie,
+  updateMovieStarRating,
+  deleteFavoriteMovie,
+})(MovieDetailsFavorite);
