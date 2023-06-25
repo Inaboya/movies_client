@@ -20,7 +20,7 @@ import {
   UPDATE_MOVIE_STAR_RATING_SUCCESS,
 } from "./actionTypes";
 
-import { FormData, MovieData } from "../utils/typings";
+import {  MovieData } from "../utils/typings";
 
 export const getMovies = () => async (dispatch: any) => {
   try {
@@ -38,10 +38,8 @@ export const getMovies = () => async (dispatch: any) => {
 };
 
 export const getMovie = (id: string) => async (dispatch: any) => {
-  console.log(id, "id");
   try {
     const res = await api.get(`/movies/${id}`);
-    console.log(res.data.data[0], "res.data");
     dispatch({
       type: GET_MOVIE_SUCCESS,
       payload: res.data.data[0],
@@ -121,7 +119,7 @@ export const deleteFavoriteMovie = (id: string) => async (dispatch: any) => {
 export const updateMovieStarRating =
   (formData: MovieData) => async (dispatch: any) => {
     try {
-      const res = await api.patch(`/movies/${formData.movieId}`, formData);
+      const res = await api.patch(`/favorite-movies/${formData.movieId}`, formData);
       dispatch({
         type: UPDATE_MOVIE_STAR_RATING_SUCCESS,
         payload: res.data,

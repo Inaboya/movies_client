@@ -22,6 +22,7 @@ import { MovieInitialState } from "../utils/typings";
 const initialState = {
   movies: [],
   favoriteMovies: [],
+  favoriteMovie: null,
   movie: null,
   // loading: false,
   error: null,
@@ -122,7 +123,7 @@ const movieReducer = (state = initialState, action: any) => {
     case GET_FAVORITE_MOVIE_SUCCESS:
       return {
         ...state,
-        movie: action.payload,
+        favoriteMovie: action.payload,
         // loading: false,
       };
 

@@ -27,44 +27,23 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
   addFavoriteMovie,
   updateMovieStarRating,
 }) => {
-    console.log(movie, "movie detail");
+  console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
-  const [showModal, setShowModal] = React.useState(false);
-  const [valueRating, setValueRating] = React.useState(0);
+//   const [starRatingValue, setStarRatingValue] =  React.useState() as undefined | string;
   const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
     getMovie && getMovie(id!);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-//   const { poster_path } = movie;
 
-  const handleModal = () => {
-    setShowModal(true);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValueRating(Number(e.target.value));
-  };
-
-  const handleStarRating = () => {
-    setLoading(true);
-    updateMovieStarRating({
-      movieId: id,
-      starRating: valueRating,
-    } as MovieData);
-    setLoading(false);
-    setShowModal(false);
-  };
 
   const handleHandleFavorite = () => {
     setLoading(true);
-    // const res = addFavoriteMovie();
 
-    addFavoriteMovie({ movieId: id!, starRating: valueRating } as MovieData);
-    // console.log({ res });
+    addFavoriteMovie({ movieId: id!, starRating: 0 } as MovieData);
 
     toast.success("Movie added to WatchList", {
       position: toast.POSITION.TOP_CENTER,
@@ -76,38 +55,6 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
   return (
     <div className="details-container">
       <div className="movie-details-container">
-        {showModal && (
-          <div className="modal-container">
-            <div className="modal-wrapper">
-              <Modal>
-                <h3 className="modal-rating-heading">
-                  Rate Movie from 0 to 5 stars
-                </h3>
-                <div className="modal-rating-container">
-                  <input
-                    type="text"
-                    name="valueRating"
-                    value={valueRating}
-                    onChange={handleChange}
-                    className="modal-rating-input"
-                  />
-                </div>
-
-                <div className="modal-btn-container">
-                  <button className="modal-btn" onClick={handleStarRating}>
-                    Rate
-                    {loading && (
-                      <i
-                        className="fas fa-spinner fa-spin"
-                        aria-hidden="true"
-                      ></i>
-                    )}
-                  </button>
-                </div>
-              </Modal>
-            </div>
-          </div>
-        )}
         <div className="movie-details-wrapper">
           <div className="image-container">
             <img
@@ -123,8 +70,8 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
 
           <div className="movie-details-btn-container">
             <div className="btn-1">
-              <button className="btn-details-1" onClick={handleModal}>
-                Rate Movie
+              <button className="btn-details-1">
+                Back
               </button>
             </div>
 

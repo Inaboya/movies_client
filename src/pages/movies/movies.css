@@ -118,11 +118,66 @@
 }
 
 .star-container {
-    width: 100%;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: red; */
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
 }
 
+input[type="radio"] {
+  display: none;
+}
+
+/* Style the star rating */
+.rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+}
+
+/* Style the star icon */
+.rating > label {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+  font-size: 1.5rem;
+  color: gray;
+  cursor: pointer;
+}
+
+/* Style the star icon when checked */
+.rating > input:checked ~ label:before {
+  content: "\2605";
+  position: absolute;
+  color: gold;
+}
+
+.modal-btn-container {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.modal-btn {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e50914;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
