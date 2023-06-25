@@ -2,18 +2,14 @@ import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { RootState } from "../../store";
-import {
-  getFavoriteMovie,
-  updateMovieStarRating,
-  deleteFavoriteMovie,
-} from "../../actions/movies";
+import { getFavoriteMovie, updateMovieStarRating, deleteFavoriteMovie } from "../../actions/movies";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./movies.css";
 import { connect } from "react-redux";
 import { starRating } from "../../utils/func";
-import { MovieData } from "../../utils/typings";
 import Modal from "../../components/Modal";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { MovieData } from "../../utils/typings";
 
 toast.configure();
 
@@ -30,7 +26,6 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
   updateMovieStarRating,
   deleteFavoriteMovie,
 }) => {
-  console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
   const [showModal, setShowModal] = React.useState(false);
@@ -56,20 +51,23 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
       movieId: id,
       starRating: valueRating,
     } as MovieData);
+
+    toast.success("Star Rating Updated", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000,
+    });
     setLoading(false);
     setShowModal(false);
   };
 
-  const removeFromFavorite = () => {
-    setLoading(true);
+  const handleDelete = () => {
     deleteFavoriteMovie(id!);
-    toast.success("Movie removed from WatchList", {
+    toast.success("Movie Deleted", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 2000,
     });
     navigate("/");
-    setLoading(false);
-  };
+  }
   return (
     <div className="details-container">
       <div className="movie-details-container">
@@ -77,58 +75,56 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
           <div className="modal-container">
             <div className="modal-wrapper">
               <Modal>
-                <h3 className="modal-rating-heading">Rate this movie</h3>
-                <div className="modal-rating-container">
+                <div className="rating">
                   <input
                     type="radio"
                     name="rating"
-                    onChange={handleChange}
-                    style={{ border: "red" }}
-                    id="star1"
-                    value="1"
-                  />
-                  <label htmlFor="star1">
-                    <i className="fa fa-star fa-2x fa-star-checked"></i>
-                  </label>
-                  <input
-                    type="radio"
-                    name="rating"
-                    onChange={handleChange}
-                    id="star2"
-                    value="2"
-                  />
-                  <label htmlFor="star2">
-                    <i className="fa fa-star fa-2x fa-star-checked"></i>
-                  </label>
-                  <input
-                    type="radio"
-                    name="rating"
-                    onChange={handleChange}
-                    id="star3"
-                    value="3"
-                  />
-                  <label htmlFor="star3">
-                    <i className="fa fa-star fa-2x fa-star-checked"></i>
-                  </label>
-                  <input
-                    type="radio"
-                    name="rating"
-                    onChange={handleChange}
-                    id="star4"
-                    value="4"
-                  />
-                  <label htmlFor="star4">
-                    <i className="fa fa-star fa-2x fa-star-checked"></i>
-                  </label>
-                  <input
-                    type="radio"
-                    name="rating"
-                    onChange={handleChange}
                     id="star5"
                     value="5"
+                    onChange={handleChange}
                   />
                   <label htmlFor="star5">
-                    <i className="fa fa-star fa-2x fa-star-checked"></i>
+                    <i className="fa fa-star fa-2x"></i>
+                  </label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star4"
+                    value="4"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="star4">
+                    <i className="fa fa-star fa-2x"></i>
+                  </label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star3"
+                    value="3"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="star3">
+                    <i className="fa fa-star fa-2x"></i>
+                  </label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star2"
+                    value="2"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="star2">
+                    <i className="fa fa-star fa-2x"></i>
+                  </label>
+                  <input
+                    type="radio"
+                    name="rating"
+                    id="star1"
+                    value="1"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="star1">
+                    <i className="fa fa-star fa-2x"></i>
                   </label>
                 </div>
 
@@ -150,14 +146,14 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
         <div className="movie-details-wrapper">
           <div className="image-container">
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie?.favoriteMovie?.movieId?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500${movie?.movieId?.poster_path}`}
               alt="{movie.title}"
               className="movie-card-image"
             />
           </div>
 
           <div className="star-container">
-            <p>{starRating(movie?.favoriteMovie?.starRating)}</p>
+            <p>{starRating(movie?.starRating)}</p>
           </div>
 
           <div className="movie-details-btn-container">
@@ -168,12 +164,7 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
             </div>
 
             <div className="btn-2">
-              <button className="btn-details-2" onClick={removeFromFavorite}>
-                Remove from Favorite{" "}
-                {loading && (
-                  <i className="fas fa-spinner fa-spin" aria-hidden="true"></i>
-                )}
-              </button>
+              <button className="btn-details-2" onClick={handleDelete}>Remove from Favorite</button>
             </div>
           </div>
         </div>
@@ -190,7 +181,7 @@ MovieDetailsFavorite.propTypes = {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  movie: state.movies.favoriteMovie,
+  movie: state.movies.favoriteMovie?.favoriteMovie,
 });
 
 export default connect(mapStateToProps, {
