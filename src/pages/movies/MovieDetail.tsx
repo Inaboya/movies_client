@@ -27,7 +27,7 @@ const MovieDetail: React.FC<MovieDetailProps> = ({
   addFavoriteMovie,
   updateMovieStarRating,
 }) => {
-  console.log(movie, "movie detail");
+  // console.log(movie, "movie detail");
   const params = useParams();
   const { id } = params;
   //   const [starRatingValue, setStarRatingValue] =  React.useState() as undefined | string;
