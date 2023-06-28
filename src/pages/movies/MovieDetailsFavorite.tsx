@@ -59,6 +59,7 @@ const MovieDetailsFavorite: React.FC<MovieDetailProps> = ({
       autoClose: 2000,
     });
     // getFavoriteMovie && getFavoriteMovie(id!);
+    navigate("/favorite-movies");
     setLoading(false);
     setShowModal(false);
   };
